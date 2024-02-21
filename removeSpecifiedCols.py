@@ -8,13 +8,13 @@ class removeSpecifiedCols:
 
     # constructor
     def __init__(self, CSVpath, saveCSVpath):
-        self.CSVpath = CSVpath
+        self.CSVpath = str(CSVpath)
         self.saveCSVpath = saveCSVpath
     
-    def create_path(self, ext):
+    def create_path(self):
         # selects only .csv files from files in path
         os.chdir(self.saveCSVpath)
-        list_csv_files = glob.glob('*.{}'.format(ext))
+        list_csv_files = glob.glob('*.{}'.format('.csv'))
         for filename in list_csv_files:
             # Get complete path to access file
             f = os.path.join(self.CSVpath, filename)
@@ -25,12 +25,12 @@ class removeSpecifiedCols:
             # name of the file whithout the ext (i.e. from 'data.csv', splits (data, csv), then take the name (data))
             filenameNoExt = filename.split(".")[0]
             # p: propose new path and name for the file
-            save_path = self.saveCSVpath + "/" + filenameNoExt + " - Output.csv" 
-            return [f, save_path]
+            save_path = str(self.saveCSVpath) + "/" + filenameNoExt + " - Output.csv" 
+            return [f, save_path] 
                 
     def select_cols(self):
         # create path
-        f, save_path = self.create_path(self, '.csv')
+        f, save_path = self.create_path()
         csv_read_data = pd.read_csv(f, encoding = 'latin1', usecols = ['ID', 'INDUSTRY (see Industry List)'])
         csv_read_data.to_csv(save_path, index = False)        
         #csv_data = pd.read_csv(f, encoding = 'latin1')
@@ -48,8 +48,8 @@ class removeSpecifiedCols:
 #remove.select_cols()
 
 # OR                          
-findCSV = 'C:\Users\I746992\OneDrive - SAP SE\General - Data Intelligence LAC\1. Mexico\2. Target List\3. Target Lists - Reports\7. Listados - 2024\Q2 - 2024\Rodrigo Lecanda'
-saveCSV = 'C:\Users\I746992\Desktop\Remove_Columns_Python\Output' 
-removeSpecifiedCols(findCSV, saveCSV)
-removeSpecifiedCols.select_cols()
+findCSV = 'C:/Users/I746992/OneDrive - SAP SE/General - Data Intelligence LAC/1. Mexico/2. Target List/3. Target Lists - Reports/7. Listados - 2024/Q2 - 2024/Rodrigo Lecanda'
+saveCSV = 'C:/Users/I746992/Desktop/Remove_Columns_Python/Output' 
+remove = removeSpecifiedCols(findCSV, saveCSV)
+remove.select_cols()
 
