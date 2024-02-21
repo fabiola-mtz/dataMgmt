@@ -28,7 +28,9 @@ class removeSpecifiedCols:
                 new = mydata[["Field_1","Field_5","Field_30","Field_33","Field_40","Field_44","Field_61"]]
                 new.to_csv(p ,index=False)
 
-# leer CSVpath y ext
-#p = removeSpecifiedCols('C:/Users/HP/Desktop/Remove_Columns_Python/Output')
+# run code
+# 1.- Open bash
+# 2.- Type "py removespecifiedCols.py [CSVpath]" where CSVpath is the path where CSV files are saved (can be found)                               
+
 
 
