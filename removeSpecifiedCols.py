@@ -9,19 +9,23 @@ class removeSpecifiedCols:
         self.CSVpath = CSVpath
         self.saveCSVpath = saveCSVpath
                 
-    def removecols(self):
+    def remove_cols(self):
         ext = ('.csv')
-        # Lists all files with, concatenating its given CSVpath
+        # Lists all files within given path
         for filename in os.listdir(self.CSVpath):
+            # Concatenate in 'f' its given CSVpath
             f = os.path.join(self.CSVpath, filename)
             # selects only .csv files from list
             if f.endswith(ext):
+                # splits current path into a tuple [head, tail]
                 head_tail = os.path.split(f) 
+                # tail is the last pathname component a.k.a the name of the file (with ext)
+                tail = head_tail[1]                 
+                # name of the file whithout the ext (i.e. from 'data.csv', splits (data, csv), then take the name (data))
+                filenameNoExt = tail.split(".")[0]
+                # propose new path and name for the file
                 head_tail1 = 'C:/Users/HP/Desktop/Remove_Columns_Python/Output' 
-                k = head_tail[1] 
-                r = k.split(".")[0]
-            
-                p = head_tail1 + "/" + r + " - Output.csv" 
+                p = head_tail1 + "/" + filenameNoExt + " - Output.csv" 
 
                 mydata = pd.read_csv(f, encoding = 'latin1')
                 
@@ -32,5 +36,7 @@ class removeSpecifiedCols:
 # 1.- Open bash
 # 2.- Type "py removespecifiedCols.py [CSVpath]" where CSVpath is the path where CSV files are saved (can be found)                               
 
-
+findCSV = 'C:\Users\I746992\OneDrive - SAP SE\General - Data Intelligence LAC\1. Mexico\2. Target List\3. Target Lists - Reports\7. Listados - 2024\Q2 - 2024\Rodrigo Lecanda'
+saveCSV = 'C:/Users/HP/Desktop/Remove_Columns_Python/Output' 
+remove = removeSpecifiedCols(findCSV, saveCSV)
 
